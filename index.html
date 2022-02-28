@@ -24,9 +24,25 @@
     <main>
       <!-- search section  -->
       <section class="container d-flex justify-content-center">
-        <input class="mx-2" type="text" placeholder="Search Phone Here" />
-        <button class="btn btn-dark text-bold">Search</button>
+        <input
+          id="search-field"
+          class="mx-2"
+          type="text"
+          placeholder="Search Phone Here"
+        />
+        <button id="search-btn" class="btn btn-dark text-bold">Search</button>
       </section>
+      <!-- search result section  -->
+      <section>
+        <div
+          id="phone-container"
+          class="row row-cols-1 row-cols-lg-3 g-4 m-2"
+        ></div>
+      </section>
+      <!-- error message  -->
+      <div id="error-message" class="container">
+        <h2 class="text-dark text-center">No Result Found</h2>
+      </div>
     </main>
     <footer></footer>
     <!-- js  -->
