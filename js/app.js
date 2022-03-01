@@ -1,4 +1,4 @@
-const phoneSearch = () => {
+const loadSearchResult = () => {
   const searchField = document.getElementById("search-field");
   const searchText = searchField.value;
   // clear search field
@@ -26,11 +26,48 @@ const displaySearchResult = (data) => {
           <div class="card-body">
             <h4 class="card-title">${element.phone_name}</h4>
             <h5 class="card-title">${element.brand}</h5>
+            <button onclick="loadExplore('${element.slug}')" class="btn btn-primary btn-lg">Explore</button>
           </div>
         </div>`;
     phoneContainer.appendChild(div);
   });
 };
+
+const loadExplore = (id) => {
+  const url = `https://openapi.programming-hero.com/api/phone/${id}`;
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => displayExploreDetails(data.data));
+};
+
+const displayExploreDetails = (details) => {
+  console.log(details);
+  const exploreContainer = document.getElementById("explore-container");
+  exploreContainer.textContent = "";
+  const div = document.createElement("div");
+  div.innerHTML = `
+  <div class="row g-0 p-2">
+    <div class="col-4">
+    <img src="${
+      details.image
+    }" class="img-fluid rounded-start" alt="device image" />
+    </div>
+    <div class="col-8">
+      <div class="card-body">
+        <h5 class="card-title">${details.name}</h5>
+        
+        <p class="card-text">
+          <small class="text-muted">${
+            details.releaseDate ? details.releaseDate : "No release date found"
+          }</small>
+        </p>
+      </div>
+    </div>
+  </div>
+  `;
+  exploreContainer.appendChild(div);
+};
+
 const errorCheck = (data) => {
   const errorMessage = document.getElementById("error-message");
   if (data.length == 0) {
@@ -42,8 +79,9 @@ const errorCheck = (data) => {
     errorMessage.style.display = "none";
   }
 };
+
 // search button handler
 document.getElementById("search-btn").addEventListener("click", () => {
   // phone search data load
-  phoneSearch();
+  loadSearchResult();
 });
