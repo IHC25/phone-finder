@@ -41,13 +41,13 @@ const loadExplore = (id) => {
 };
 
 const displayExploreDetails = (details) => {
-  console.log(details.mainFeatures);
+  console.log(details);
   const exploreContainer = document.getElementById("explore-container");
   exploreContainer.textContent = "";
   const div = document.createElement("div");
   div.innerHTML = `
   <div class="row g-0 p-2">
-    <div class="col-4">
+    <div class="col-4 d-flex align-items-center">
     <img src="${
       details.image
     }" class="img-fluid rounded-start h-75" alt="device image" />
@@ -55,10 +55,28 @@ const displayExploreDetails = (details) => {
     <div class="col-8">
       <div class="card-body">
         <h4 class="card-title">${details.name}</h4>
+        <h5 class="card-title">Features:</h5>
         <p class="card-text">${details.mainFeatures.storage}</p>
         <p class="card-text">${details.mainFeatures.displaySize}</p>
         <p class="card-text">${details.mainFeatures.chipSet}</p>
         <p class="card-text">${details.mainFeatures.memory}</p>
+        <h5 class="card-title">Sensors:</h5>
+        <p class="card-text">${details.mainFeatures.sensors}</p>
+        <h5 class="card-title">Others:</h5>
+        <p class="card-text">
+          Bluetooth: ${
+            details.others?.Bluetooth
+              ? details.others.Bluetooth
+              : "No Data Found"
+          }, 
+          GPS: ${details.others?.GPS ? details.others.GPS : "No Data Found"}, 
+          NFC: ${details.others?.NFC ? details.others.NFC : "No Data Found"}, 
+          Radio: ${
+            details.others?.Radio ? details.others.Radio : "No Data Found"
+          }, 
+          USB: ${details.others?.USB ? details.others.USB : "No Data Found"}, 
+          WLAN: ${details.others?.WLAN ? details.others.WLAN : "No Data Found"}
+        </p>
         
         <p class="card-text">
           <small class="text-muted">${
