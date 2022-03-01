@@ -1,41 +1,26 @@
 const phoneSearch = () => {
   const searchField = document.getElementById("search-field");
   const searchText = searchField.value;
-  const errorMessage = document.getElementById("error-message");
   // clear search field
   searchField.value = "";
   // error handling
-  if (searchText.length == 0) {
-    // show error message
-    errorMessage.style.display = "grid";
-    document.getElementById("phone-container").textContent = "";
-  } else {
-    // hide error message
-    errorMessage.style.display = "none";
-    // load data
-    const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => displaySearchResult(data.data));
-  }
+  errorCheck(searchText);
+  // load data
+  const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => displaySearchResult(data.data));
 };
 const displaySearchResult = (data) => {
-  const errorMessage = document.getElementById("error-message");
   const phoneContainer = document.getElementById("phone-container");
   phoneContainer.textContent = "";
-  console.log(data.length);
-  if (data.length == 0) {
-    // show error message
-    errorMessage.style.display = "grid";
-    document.getElementById("phone-container").textContent = "";
-  } else {
-    // hide error message
-    errorMessage.style.display = "none";
-    // show data
-    data.forEach((element) => {
-      const div = document.createElement("div");
-      div.classList.add = "col";
-      div.innerHTML = `
+  // error handling
+  errorCheck(data);
+  // show data
+  data.forEach((element) => {
+    const div = document.createElement("div");
+    div.classList.add = "col";
+    div.innerHTML = `
         <div class="card d-flex align-items-center py-2">
           <img src="${element.image}" class="card-img-top w-50" alt="..." />
           <div class="card-body">
@@ -43,8 +28,18 @@ const displaySearchResult = (data) => {
             <h5 class="card-title">${element.brand}</h5>
           </div>
         </div>`;
-      phoneContainer.appendChild(div);
-    });
+    phoneContainer.appendChild(div);
+  });
+};
+const errorCheck = (data) => {
+  const errorMessage = document.getElementById("error-message");
+  if (data.length == 0) {
+    // show error message
+    errorMessage.style.display = "grid";
+    document.getElementById("phone-container").textContent = "";
+  } else {
+    // hide error message
+    errorMessage.style.display = "none";
   }
 };
 // search button handler
