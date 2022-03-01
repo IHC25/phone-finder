@@ -17,28 +17,28 @@
   </head>
   <body>
     <!-- header starts  -->
-    <header>
-      <h1 class="text-center py-2 text-primary">Phone Finder</h1>
-    </header>
-    <!-- header ends  -->
-    <main>
+    <header class="row py-3">
+      <div class="col-12 col-lg-6">
+        <h2 class="text-center py-2 text-primary">Phone Finder</h2>
+      </div>
       <!-- search section  -->
-      <section class="container d-flex justify-content-center">
+      <section
+        class="container col-12 col-lg-6 d-flex align-items-center justify-content-center"
+      >
         <input
           id="search-field"
-          class="mx-2"
+          class="mx-2 w-50 h-50"
           type="text"
           placeholder="Search Phone Here"
         />
         <button id="search-btn" class="btn btn-dark text-bold">Search</button>
       </section>
+    </header>
+    <!-- header ends  -->
+    <main>
       <!-- explore details section  -->
       <section class="container d-flex justify-content-center my-3">
-        <div
-          id="explore-container"
-          class="card mb-3"
-          style="max-width: 540px"
-        ></div>
+        <div id="explore-container" class="card mb-3"></div>
       </section>
       <!-- search result section  -->
       <section>
