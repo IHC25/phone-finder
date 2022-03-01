@@ -41,7 +41,7 @@ const loadExplore = (id) => {
 };
 
 const displayExploreDetails = (details) => {
-  console.log(details);
+  console.log(details.mainFeatures);
   const exploreContainer = document.getElementById("explore-container");
   exploreContainer.textContent = "";
   const div = document.createElement("div");
@@ -50,11 +50,15 @@ const displayExploreDetails = (details) => {
     <div class="col-4">
     <img src="${
       details.image
-    }" class="img-fluid rounded-start" alt="device image" />
+    }" class="img-fluid rounded-start h-75" alt="device image" />
     </div>
     <div class="col-8">
       <div class="card-body">
-        <h5 class="card-title">${details.name}</h5>
+        <h4 class="card-title">${details.name}</h4>
+        <p class="card-text">${details.mainFeatures.storage}</p>
+        <p class="card-text">${details.mainFeatures.displaySize}</p>
+        <p class="card-text">${details.mainFeatures.chipSet}</p>
+        <p class="card-text">${details.mainFeatures.memory}</p>
         
         <p class="card-text">
           <small class="text-muted">${
