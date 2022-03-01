@@ -20,23 +20,32 @@ const phoneSearch = () => {
   }
 };
 const displaySearchResult = (data) => {
-  console.log(data);
+  const errorMessage = document.getElementById("error-message");
   const phoneContainer = document.getElementById("phone-container");
   phoneContainer.textContent = "";
-  data.forEach((element) => {
-    console.log(element);
-    const div = document.createElement("div");
-    div.classList.add = "col";
-    div.innerHTML = `
-      <div class="card d-flex align-items-center py-2">
-        <img src="${element.image}" class="card-img-top w-50" alt="..." />
-        <div class="card-body">
-          <h4 class="card-title">${element.phone_name}</h4>
-          <h5 class="card-title">${element.brand}</h5>
-        </div>
-      </div>`;
-    phoneContainer.appendChild(div);
-  });
+  console.log(data.length);
+  if (data.length == 0) {
+    // show error message
+    errorMessage.style.display = "grid";
+    document.getElementById("phone-container").textContent = "";
+  } else {
+    // hide error message
+    errorMessage.style.display = "none";
+    // show data
+    data.forEach((element) => {
+      const div = document.createElement("div");
+      div.classList.add = "col";
+      div.innerHTML = `
+        <div class="card d-flex align-items-center py-2">
+          <img src="${element.image}" class="card-img-top w-50" alt="..." />
+          <div class="card-body">
+            <h4 class="card-title">${element.phone_name}</h4>
+            <h5 class="card-title">${element.brand}</h5>
+          </div>
+        </div>`;
+      phoneContainer.appendChild(div);
+    });
+  }
 };
 // search button handler
 document.getElementById("search-btn").addEventListener("click", () => {
